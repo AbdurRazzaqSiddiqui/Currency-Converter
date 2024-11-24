@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Currency Converter</title>
+</head>
+<body>
+    <h1>Currency Converter</h1>
+    <form method="post">
+        <input type="number" name="amount" placeholder="Amount" required>
+        <input type="text" name="from_currency" placeholder="From Currency (e.g. USD)" required>
+        <input type="text" name="to_currency" placeholder="To Currency (e.g. EUR)" required>
+        <button type="submit">Convert</button>
+    </form>
+    {% if result %}
+    <h2>Conversion Result: {{ result }}</h2>
+    {% endif %}
+</body>
+</html>
