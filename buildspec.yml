@@ -7,9 +7,13 @@ phases:
     commands:
       - echo Installing dependencies...
       - pip install --upgrade pip
-      - pip install pyinstaller
-      - pip install -r requirements.txt
+      - pip install Flask
       - pip install pytest
+      - pip install pytest-pythonpath
+      - pip install requests
+      - pip install python-dotenv
+      - pip install gunicorn
+      - pip install pyinstaller
 
   pre_build:
     commands:
