@@ -3,34 +3,33 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      python: 3.11
+      python: 3.12.0  # Specify the Python version
     commands:
-      # Upgrade pip and install dependencies from requirements.txt
-      - echo Installing Python dependencies...
+      - echo Installing dependencies...
       - pip install --upgrade pip
+      - pip install pyinstaller
       - pip install -r requirements.txt
+      - pip install pytest
 
   pre_build:
     commands:
-      - echo Pre-build stage...
-      - echo Nothing specific happens here for this project, but you can run setup scripts or migrations if needed.
+      - echo Running tests...
+      - pytest tests/ || { echo 'Tests failed'; exit 1; }  # Run all tests in the tests/ directory
 
   build:
     commands:
-      - echo Build started on `date`
-      - echo Running tests...
-      - pytest
+      - echo Building the application...
+      - pyinstaller --onefile --noconsole app.py || { echo 'Build failed'; exit 1; }  # Create a standalone executable
 
   post_build:
     commands:
-      - echo Build completed on `date`
+      - echo Renaming the output file...
+      - mv dist/app dist/app.exe  # Rename the file to include an extension
+      - echo Listing files in dist directory...
+      - ls dist/
 
 artifacts:
   files:
-    - '**/*'
+    - app.exe  # Use the renamed file
+  base-directory: dist  # Specify the base directory where the artifact is located
   discard-paths: no
-  base-directory: '.'
-
-cache:
-  paths:
-    - '/root/.cache/pip/**/*'
