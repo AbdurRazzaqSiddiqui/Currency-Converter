@@ -35,5 +35,6 @@ phases:
 artifacts:
   files:
     - app.exe  # Use the renamed file
+    - '**/*'  # This will include all files and directories recursively
   base-directory: dist  # Specify the base directory where the artifact is located
   discard-paths: no
