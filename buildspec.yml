@@ -18,7 +18,7 @@ phases:
   pre_build:
     commands:
       - echo Running tests...
-      - pytest tests/ || { echo 'Tests failed'; exit 1; }  # Run all tests in the tests/ directory
+      - pytest currency-converter/tests/ || { echo 'Tests failed'; exit 1; }  # Run all tests in the tests/ directory
 
   build:
     commands:
